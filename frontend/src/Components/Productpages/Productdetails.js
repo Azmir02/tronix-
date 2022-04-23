@@ -111,6 +111,14 @@ const Productdetails = () => {
       })
   }
 
+  //for quantity update
+  const quantityUpgrade = (product,quantity)=>{
+    cartContext({
+      type: "ADD_TO_CART",
+      payload:{...product,quantity}
+    })
+
+  }
 
 
   return (
@@ -193,7 +201,7 @@ const Productdetails = () => {
            <Row className='align-items-center'>
                <Col lg = {6}>
                    <div className="details-product-left">
-                       <img src= {product.image} alt="" />
+                       <img style={{width: "100%"}} src= {product.image} alt="" />
                    </div>
                </Col>
                <Col lg = {6}>
@@ -242,11 +250,12 @@ const Productdetails = () => {
                       <div className="cart d-flex align-items-center justify-content-between mt-5">
                         <div className="quantity-part w-50">
                             <span>Quantity</span>
-                            <button><BsDash></BsDash></button>
+                           
+                            <button type='button' onClick={()=>quantityUpgrade(product,quantity == 0 ? 0 : quantity -1)}><BsDash></BsDash></button>
 
                             <span className='quantity-count'>{quantity}</span>
                               
-                            <button><BsPlus></BsPlus></button>
+                            <button type='button' onClick={()=>quantityUpgrade(product,quantity + 1)}><BsPlus></BsPlus></button>
                         </div>
                           <div className="button-area d-flex justify-content-end w-50">
                               <div className="chat me-3">

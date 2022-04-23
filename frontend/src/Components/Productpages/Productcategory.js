@@ -155,7 +155,7 @@ const Productcategory = () => {
                                 <Col lg = {4} className = "mt-5">
                                     <div className="product-all">
                                         <div className="product-image">
-                                            <img style={{width: "100%"}} src= {item.image} alt="" />
+                                            <img style={{width: "100%",borderRadius: "8px"}} src= {item.image} alt="" />
                                         </div>
                                         <div className="product-content text-center mt-3">
                                             <h4><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h4>
