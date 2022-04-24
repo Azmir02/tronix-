@@ -451,3 +451,22 @@ ol {
 .quantity-part button:hover {
   background-color: #f46b5b;
 }
+.prev-arrow button,
+.next-arrow button {
+  padding: 12px 15px;
+  border-radius: 8px;
+  background: #fff;
+  border: none;
+  box-shadow: 0px 24px 50px rgba(0, 0, 0, 0.1);
+}
+.prev-arrow button svg,
+.next-arrow button svg {
+  fill: #f46b5b;
+}
+.related-image {
+  border: 1px solid #d0d0d2;
+  border-radius: 8px;
+}
+.wishlist-mark {
+  fill: #f46b5b !important;
+}

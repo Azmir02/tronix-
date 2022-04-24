@@ -1,6 +1,6 @@
 import React, { useEffect, useState,useReducer, useContext } from 'react'
 import { Col, Row ,Spinner} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link,useParams} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
@@ -42,14 +42,19 @@ function reducer(state, action) {
 
 const Productcategory = () => {
 
-    const {state, dispatch:cartContext} = useContext(Store) 
+    const {state,state2,dispatch2, dispatch:cartContext} = useContext(Store) 
     const {cart:{cartItems}} = state
+    const {wishlist:{wishlistItems}} = state2
+    console.log(wishlistItems);
 
     const [{isLoading,product,error}, dispatch] = useReducer(reducer, {
         isLoading: false,
         product: [],
         error: ''
     });
+
+    const [wishlistproduct,setWishlistproduct] = useState('')
+    console.log(wishlistproduct);
 
     useEffect(()=>{
         let getproducts = async ()=>{
@@ -60,11 +65,24 @@ const Productcategory = () => {
             }
             catch(err){
                 dispatch({type: 'FETCH_ERROR',payload:err.message })
+                
             }
            
         }
         getproducts()
     },[])
+
+    
+
+
+    //wishlist
+    const handleWishlist = (product)=>{
+        dispatch2({
+        type: 'ADD_WISHLIST',
+        payload: product
+        })
+        
+    }
 
 
     //add-to-cart
@@ -152,6 +170,7 @@ const Productcategory = () => {
 
                         :
                             product.map((item)=>(
+                                
                                 <Col lg = {4} className = "mt-5">
                                     <div className="product-all">
                                         <div className="product-image">
@@ -184,7 +203,15 @@ const Productcategory = () => {
                                             </div>
                                             }
                                             <div className="whishlist">
-                                                <BsFillHeartFill></BsFillHeartFill>
+
+                                                {wishlistItems.find(product=> product._id === item._id)
+                                                 ?  
+                                                 <BsFillHeartFill className="wishlist-mark" onClick={()=>handleWishlist(item)}></BsFillHeartFill> 
+                                                 :
+                                                 <BsFillHeartFill onClick={()=>handleWishlist(item)}></BsFillHeartFill>
+                                                 }
+                                                
+                                                
                                             </div>
                                         </div>
                                     </div>

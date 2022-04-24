@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React,{useContext, useEffect, useState,useReducer} from 'react'
 import { Col, Container, Row,Navbar,Nav,Breadcrumb,Badge} from 'react-bootstrap'
-import { BsPlus,BsDash,BsInstagram,BsFacebook,BsTwitter,BsLinkedin,BsTelephone,BsEnvelope,BsPerson,BsSearch ,BsBag,BsArrowRightShort,BsFillHeartFill} from "react-icons/bs";
+import { BsPlus,BsChevronLeft,BsChevronRight,BsDash,BsInstagram,BsFacebook,BsTwitter,BsLinkedin,BsTelephone,BsEnvelope,BsPerson,BsSearch ,BsBag,BsArrowRightShort,BsFillHeartFill} from "react-icons/bs";
 import { useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -41,8 +41,9 @@ function reducer(state, action) {
 
 const Productdetails = () => {
     const params = useParams()
-    const {state, dispatch:cartContext} = useContext(Store) 
+    const {state,state2, dispatch:cartContext,dispatch2} = useContext(Store) 
     const {cart:{cartItems}} = state
+    const {wishlist:{wishlistItems}} = state2
 
     const [{isLoading,product,error}, dispatch] = useReducer(reducer, {
         isLoading: false,
@@ -51,6 +52,8 @@ const Productdetails = () => {
     });
 
     const [quantity,setQuantity] = useState(0)
+    const [relatedproducts,setRelatedproducts] = useState([])
+    const [wishlistproduct,setWishlistproduct] = useState('')
 
     useEffect(()=>{
         let getproducts = async ()=>{
@@ -58,23 +61,43 @@ const Productdetails = () => {
             try{
                 let productInfo = await axios.get(`/api/products/${params.slug}`)
                 dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
-                console.log(product);
+
+
+                 //related products
+                let productall = await axios.get('/api/products/all')
+                let filterproduct = productall.data.filter((item)=> item.category == productInfo.data.category && item.name !== productInfo.data.name)
+                setRelatedproducts(filterproduct)
             }
             catch(err){
                 dispatch({type: 'FETCH_ERROR',payload:err.message })
             }
+        
+           
            
         }
         getproducts()
     },[params.slug])
 
+
+    
+  
+
     useEffect(()=>{
       const existingItem = cartItems.find((item)=> item._id == product._id)
       const quantity = existingItem ? existingItem.quantity : 0
       setQuantity(quantity)
-    },[cartItems,product])
+      //wishlist products
+        try{
+          let wishlists = wishlistItems.find((item) => product._id === item._id)
+          setWishlistproduct(wishlists._id == product._id)
+        }
+        catch{
+          setWishlistproduct(false)
+        }
+    },[cartItems,product,wishlistItems])
 
 
+  //add to cart
     const handleCart = async (product)=>{
       const existingItem = cartItems.find((item)=> item._id == product._id)
       const quantity = existingItem ? existingItem.quantity + 1 : 1
@@ -119,6 +142,14 @@ const Productdetails = () => {
     })
 
   }
+//wishlist
+const handleWishlist = ()=>{
+  dispatch2({
+    type: 'ADD_WISHLIST',
+    payload: product
+  })
+
+}
 
 
   return (
@@ -203,6 +234,38 @@ const Productdetails = () => {
                    <div className="details-product-left">
                        <img style={{width: "100%"}} src= {product.image} alt="" />
                    </div>
+                   <Row className='justify-content-center align-items-center mt-5'>
+                     <Col lg = {1}>
+                        <div className="prev-arrow">
+                          <button type='button'><BsChevronLeft></BsChevronLeft></button>
+                        </div>
+                     </Col>
+                     <Col lg = {8}>
+                       {relatedproducts.length > 0
+                       ?
+                       <Row>
+                           {
+                              relatedproducts.map((item)=>(
+                                <>
+                                  <Col lg = {3}>
+                                    <div className="related-image">
+                                      <img  className='w-100 img-fluid' src= {item.image} />
+                                    </div>
+                                  </Col>
+                                </>
+                            ))
+                           }
+                       </Row>
+                       :
+                       ""
+                       }
+                     </Col>
+                     <Col lg = {1}>
+                        <div className="next-arrow">
+                          <button type='button'><BsChevronRight></BsChevronRight></button>
+                        </div>
+                     </Col>
+                   </Row>
                </Col>
                <Col lg = {6}>
                    <div className="subdetails-product">
@@ -213,7 +276,7 @@ const Productdetails = () => {
                             </div>
                             <div className="wishlist-right w-50 text-end">
                               <div className="whishlist">
-                                <BsFillHeartFill></BsFillHeartFill>
+                              <BsFillHeartFill className={`${wishlistproduct ? "wishlist-mark" : ""}`} onClick={handleWishlist}></BsFillHeartFill>
                                 <span>Add to whishlist</span>
                               </div>
                             </div>
