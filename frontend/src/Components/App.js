@@ -3,6 +3,7 @@ import {Routes,Route,} from "react-router-dom";
 import { BsInstagram,BsFacebook,BsTwitter,BsLinkedin,BsTelephone,BsEnvelope ,BsSearch,BsBag} from "react-icons/bs";
 import Productpage from "./Productpages/Productpage";
 import Productdetails from "./Productpages/Productdetails";
+import Productlist from "./Productpages/Productlist";
 
 
 
@@ -42,6 +43,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/api/products/all" element={<Productpage/>}></Route>
+          <Route path="/api/products/productlist" element={<Productlist/>}></Route>
           <Route path="/api/products/:slug" element={<Productdetails/>}></Route>
         </Routes>
    </>

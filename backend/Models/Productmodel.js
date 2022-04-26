@@ -31,6 +31,9 @@ const Products = new Schema({
     reviews:{
         type: Number,
     },
+    featured:{
+        type: Boolean,
+    },
     category:{
         type: String,
         required: true

@@ -152,7 +152,7 @@ const Productcategory = () => {
                                 <p>Product List</p>
                             </div>
                             <div className="view-all w-50 text-end">
-                                <Link to = "/productlist">View All</Link>
+                                <Link to = "/api/products/productlist">View All</Link>
                             </div>
                         </div>
                     </div>
@@ -171,6 +171,8 @@ const Productcategory = () => {
                         :
                             product.map((item)=>(
                                 
+                                item.featured == true
+                                ?
                                 <Col lg = {4} className = "mt-5">
                                     <div className="product-all">
                                         <div className="product-image">
@@ -215,7 +217,9 @@ const Productcategory = () => {
                                             </div>
                                         </div>
                                     </div>
-                            </Col>
+                                </Col>
+                                :
+                                ""
                             ))
                     }
                             

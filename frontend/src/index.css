@@ -227,6 +227,13 @@ ol {
   font-size: 48px;
   color: #383838;
 }
+.p-list .header h3{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  color: #383838;
+  margin-top: 120px;
+}
 .allproduct .header p {
   font-family: "Poppins", sans-serif;
   font-size: 16px;
@@ -469,4 +476,42 @@ ol {
 }
 .wishlist-mark {
   fill: #f46b5b !important;
+}
+.p-list-main .searchnav_two .search-bar {
+  width: 550px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+.p-list-main .searchnav_two .search-bar button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  border: none;
+  background: #f46b5b;
+  padding: 15px 22px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.p-list-main .searchnav_two .search-bar button svg {
+  fill: #fff;
+}
+.p-list-main .searchnav_two .search-bar input {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  width: 100%;
+  padding: 15px 50px 15px 22px;
+  background: #fff;
+  border-radius: 8px;
+  border: none; 
+  color: #A7A7A7;
+  filter: drop-shadow(0px 24px 50px rgba(0, 0, 0, 0.1));
+}
+.p-list-main .searchnav_two .search-bar input::placeholder{
+  color: #A7A7A7;
+}
+.p-list-main .searchnav_two .search-bar input:focus {
+  outline: none;
 }

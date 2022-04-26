@@ -249,7 +249,7 @@ const handleWishlist = ()=>{
                                 <>
                                   <Col lg = {3}>
                                     <div className="related-image">
-                                      <img  className='w-100 img-fluid' src= {item.image} />
+                                      <Link to = {`${`/api/products/${item.slug}`}`}><img  className='w-100 img-fluid' src= {item.image} /></Link>
                                     </div>
                                   </Col>
                                 </>

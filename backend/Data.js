@@ -7,6 +7,7 @@ const Product_data = [
         rating: 5,
         inStock: 100,
         reviews: 12,
+        featured: true,
         category: "Mobile & Tablet",
         description: "Smartphone with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -19,6 +20,7 @@ const Product_data = [
         rating: 4.2,
         inStock: 0,
         reviews: 120,
+        featured: true,
         category: "TV & Smart Box",
         description: "Smarttv with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -31,6 +33,7 @@ const Product_data = [
         rating: 5,
         inStock: 40,
         reviews: 19,
+        featured: true,
         category: "Microphone & Audio",
         description: "Portablespeaker with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -43,6 +46,7 @@ const Product_data = [
         rating: 4,
         inStock: 10,
         reviews: 20,
+        featured: true,
         category: "Microphone & Audio",
         description: "Wireless microphone with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -55,6 +59,7 @@ const Product_data = [
         rating: 5,
         inStock: 80,
         reviews: 18,
+        featured: true,
         category: "Smart Watch",
         description: "Smart watch with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -67,6 +72,7 @@ const Product_data = [
         rating: 5,
         inStock: 40,
         reviews: 100,
+        featured: true,
         category: "Camera",
         description: "Camera HD with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -79,6 +85,7 @@ const Product_data = [
         rating: 3,
         inStock: 50,
         reviews: 82,
+        featured: false,
         category: "Microphone & Audio",
         description: "Headset Hyper with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -91,6 +98,7 @@ const Product_data = [
         rating: 3,
         inStock: 50,
         reviews: 82,
+        featured: false,
         category: "TV & Smart Box",
         description: "Smarttv with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -103,6 +111,7 @@ const Product_data = [
         rating: 5,
         inStock: 20,
         reviews: 62,
+        featured: false,
         category: "Smart Watch",
         description: "Smart watch with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -115,6 +124,7 @@ const Product_data = [
         rating: 5,
         inStock: 50,
         reviews: 92,
+        featured: false,
         category: "Camera",
         description: "Camera HD with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -127,6 +137,7 @@ const Product_data = [
         rating: 5,
         inStock: 50,
         reviews: 22,
+        featured: false,
         category: "Mobile & Tablet",
         description: "Mobile & Tablet with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
@@ -139,6 +150,7 @@ const Product_data = [
         rating: 5,
         inStock: 20,
         reviews: 22,
+        featured: false,
         category: "Mobile & Tablet",
         description: "Mobile & Tablet with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
