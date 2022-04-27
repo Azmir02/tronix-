@@ -1,6 +1,6 @@
 import React, { useEffect, useState,useReducer, useContext } from 'react'
 import { Col, Row ,Spinner} from 'react-bootstrap'
-import {Link,useParams} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
@@ -45,7 +45,6 @@ const Productcategory = () => {
     const {state,state2,dispatch2, dispatch:cartContext} = useContext(Store) 
     const {cart:{cartItems}} = state
     const {wishlist:{wishlistItems}} = state2
-    console.log(wishlistItems);
 
     const [{isLoading,product,error}, dispatch] = useReducer(reducer, {
         isLoading: false,
@@ -54,7 +53,6 @@ const Productcategory = () => {
     });
 
     const [wishlistproduct,setWishlistproduct] = useState('')
-    console.log(wishlistproduct);
 
     useEffect(()=>{
         let getproducts = async ()=>{
