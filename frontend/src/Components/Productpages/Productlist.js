@@ -1,6 +1,6 @@
 import React,{useEffect, useState,useReducer,useContext} from 'react'
 import { Col, Container, Row,Navbar,Nav,Breadcrumb,Badge,Spinner} from 'react-bootstrap'
-import { BsInstagram,BsFacebook,BsTwitter,BsLinkedin,BsTelephone,BsEnvelope,BsPerson,BsSearch ,BsBag,BsArrowRightShort} from "react-icons/bs";
+import { BsInstagram,BsFacebook,BsTwitter,BsLinkedin,BsFillHeartFill,BsEnvelope,BsPerson,BsSearch ,BsBag,BsArrowRightShort} from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import Detailsrating from './Detailsrating';
 import axios from 'axios'
@@ -41,13 +41,13 @@ const Productlist = () => {
   const {cart:{cartItems}} = state
   const {wishlist:{wishlistItems}} = state2
 
+
   const [{isLoading,product,error}, dispatch] = useReducer(reducer, {
       isLoading: false,
       product: [],
       error: ''
   });
 
-    const [wishlistproduct,setWishlistproduct] = useState('')
 
     useEffect(()=>{
         let getproducts = async ()=>{
@@ -64,6 +64,16 @@ const Productlist = () => {
         }
         getproducts()
     },[])
+
+
+    //wishlist
+    const handleWishlist = (product)=>{
+      dispatch2({
+        type: 'ADD_WISHLIST',
+        payload: product
+      })
+
+    }
 
   return (
     <>
@@ -161,8 +171,22 @@ const Productlist = () => {
                 </div>
               </Col>
               <Col lg = {3}>
-                <div className='view-price'>
-                      <h4>{item.price}</h4>
+                <div className='view-price text-end'>
+                      <h4>${item.price}</h4>
+                      <div className="whishlist">
+                      {wishlistItems.find(product=> product._id === item._id)
+                        ?  
+                       <>
+                          <BsFillHeartFill className="wishlist-mark" onClick={()=>handleWishlist(item)}></BsFillHeartFill>
+                          <span>Add to whishlist</span> 
+                        </>
+                        :
+                       <>
+                          <BsFillHeartFill onClick={()=>handleWishlist(item)}></BsFillHeartFill>
+                          <span>Add to whishlist</span>
+                       </>
+                      }                         
+                      </div>
                 </div>
               </Col>
             </Row>

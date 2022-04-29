@@ -227,7 +227,7 @@ ol {
   font-size: 48px;
   color: #383838;
 }
-.p-list .header h3{
+.p-list .header h3 {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 48px;
@@ -505,44 +505,46 @@ ol {
   padding: 15px 50px 15px 22px;
   background: #fff;
   border-radius: 8px;
-  border: none; 
-  color: #A7A7A7;
+  border: none;
+  color: #a7a7a7;
   filter: drop-shadow(0px 24px 50px rgba(0, 0, 0, 0.1));
 }
-.p-list-main .searchnav_two .search-bar input::placeholder{
-  color: #A7A7A7;
+.p-list-main .searchnav_two .search-bar input::placeholder {
+  color: #a7a7a7;
 }
 .p-list-main .searchnav_two .search-bar input:focus {
   outline: none;
 }
-.main-view-part{
+.main-view-part {
   padding-top: 150px;
 }
-.view-details i{
+
+.view-details i {
   color: #ffd687;
 }
-.view-details span{
+.view-details span {
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: #383838;
   margin-right: 8px;
 }
-.view-details p{
+.view-details p {
   display: inline-block;
   margin-left: 14px;
-  color: #A7A7A7;
+  color: #a7a7a7;
   font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 400;
 }
-.view-header h2{
+.view-header h2 {
   font-family: "Poppins", sans-serif;
   font-size: 24px;
   font-weight: 500;
   color: #383838;
+  margin-bottom: 20px;
 }
-.view-header p{
+.view-header p {
   margin: 0;
   font-size: 14px;
   margin-bottom: 20px;
@@ -556,4 +558,28 @@ ol {
   font-weight: 400;
   color: #fff;
   border: none;
+}
+.view-price h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  color: #f46b5b;
+  margin-bottom: 30px;
+}
+.view-price .whishlist svg {
+  fill: #d0d0d2;
+  margin-left: 29px;
+  cursor: pointer;
+}
+.view-price .whishlist svg {
+  fill: #d0d0d2;
+  margin-left: 29px;
+  cursor: pointer;
+}
+.view-price .whishlist span {
+  color: #383838;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 8px;
 }

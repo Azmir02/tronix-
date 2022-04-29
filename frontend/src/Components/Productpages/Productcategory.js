@@ -52,8 +52,6 @@ const Productcategory = () => {
         error: ''
     });
 
-    const [wishlistproduct,setWishlistproduct] = useState('')
-
     useEffect(()=>{
         let getproducts = async ()=>{
             dispatch({type: 'FETCH_REQUEST'})
