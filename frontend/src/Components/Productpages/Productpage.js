@@ -4,6 +4,7 @@ import { BsInstagram,BsFacebook,BsTwitter,BsLinkedin,BsTelephone,BsEnvelope,BsPe
 import { Link } from 'react-router-dom';
 import Productcategory from './Productcategory';
 import { Store } from '../Store';
+import Footer from '../layouts/Footer';
 
 
 const Productpage = () => {
@@ -35,7 +36,7 @@ const Productpage = () => {
 
 
         <Navbar expand="lg">
-  <Container>
+    <Container>
     <Navbar.Brand href="#">
             <div className="logo">
               <a href="#">Tronix</a>
@@ -65,7 +66,7 @@ const Productpage = () => {
     </Navbar.Collapse>
               <div className="cartoption_two">
                 <div className="cart-bag">
-                <BsBag></BsBag>
+                <Link to = "/cartpage"><BsBag></BsBag></Link>
                 {state.cart.cartItems.length > 0 &&   <Badge pill>{state.cart.cartItems.length}</Badge>}
                 <BsEnvelope></BsEnvelope>
               </div>
@@ -88,6 +89,10 @@ const Productpage = () => {
    <Container>
      <Productcategory></Productcategory>
    </Container>
+   
+    {/*======footer part=====*/}
+
+    <Footer></Footer>
     </>
   )
 }

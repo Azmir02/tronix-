@@ -1,10 +1,16 @@
 import React,{useEffect, useState,useReducer,useContext} from 'react'
-import { Col, Container, Row,Navbar,Nav,Breadcrumb,Badge,Spinner} from 'react-bootstrap'
-import { BsInstagram,BsFacebook,BsTwitter,BsLinkedin,BsFillHeartFill,BsEnvelope,BsPerson,BsSearch ,BsBag,BsArrowRightShort} from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import { Col, Container, Row,Navbar,Nav,Badge,Spinner} from 'react-bootstrap'
+import {BsEnvelope,BsSearch ,BsBag,BsListUl,BsMicrosoft} from "react-icons/bs";
+import { Link ,useNavigate} from 'react-router-dom';
 import Detailsrating from './Detailsrating';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import { Store } from '../Store';
+import Footer from '../layouts/Footer';
+import Ratings from '../Ratings';
+import Productsummery from './Productsummery';
+import Productsummery2 from './Productsummery2';
 
 
 
@@ -37,9 +43,10 @@ function reducer(state, action) {
 }
 
 const Productlist = () => {
-  const {state,state2,dispatch2, dispatch:cartContext} = useContext(Store) 
+  const {state,state2,dispatch3, dispatch:cartContext} = useContext(Store) 
   const {cart:{cartItems}} = state
   const {wishlist:{wishlistItems}} = state2
+  const navigate = useNavigate()
 
 
   const [{isLoading,product,error}, dispatch] = useReducer(reducer, {
@@ -47,6 +54,13 @@ const Productlist = () => {
       product: [],
       error: ''
   });
+
+  //listing product
+  const [lists,setLists] = useState(true)
+  const [searchtopic,setSearchtopic] = useState("")
+  const [searchresult,setSearchresult] = useState([])
+
+
 
 
     useEffect(()=>{
@@ -64,16 +78,42 @@ const Productlist = () => {
         }
         getproducts()
     },[])
-
-
-    //wishlist
-    const handleWishlist = (product)=>{
-      dispatch2({
-        type: 'ADD_WISHLIST',
-        payload: product
+      
+    const handleSearch = (e)=>{
+      setSearchtopic(e.target.value)
+      if(e.target.value){
+      let searchArr = []
+      product.map((item)=>{
+        if(item.name.includes(searchtopic.toLowerCase())){
+          searchArr.push(item)
+        }
       })
-
+        setSearchresult(searchArr)
+      }
+      else{
+        setSearchresult([])
+      }
     }
+  
+  
+    const handleSearches = ()=>{
+      let searchArr = []
+      product.map((item)=>{
+       if(item.name.includes(searchtopic.toLowerCase())){
+        searchArr.push(item)
+          console.log(item);
+        }
+      })
+      setSearchresult(searchArr)
+      dispatch3({
+        type: "SEARCH_RESULT",
+        payload: searchArr
+      })
+      navigate("/api/products/productlist")
+  
+    }
+
+
 
   return (
     <>
@@ -103,7 +143,7 @@ const Productlist = () => {
     </Navbar.Collapse>
               <div className="cartoption_two">
                 <div className="cart-bag">
-                <BsBag></BsBag>
+                <Link to = "/cartpage"><BsBag></BsBag></Link>
                 {state.cart.cartItems.length > 0 &&   <Badge pill>{state.cart.cartItems.length}</Badge>}
                 <BsEnvelope></BsEnvelope>
               </div>
@@ -118,85 +158,61 @@ const Productlist = () => {
                     </div>
                     <div className="searchnav_two">
                         <div className="search-bar">
-                        <input type="text" placeholder='Search here' />
-                        <button type='button'><BsSearch></BsSearch></button>
+                        <input onChange={handleSearch} type="text" placeholder='Search here' />
+                        <button onClick = {handleSearches} type='button'><BsSearch></BsSearch></button>
                         </div>
                     </div>
                 </Col>
            </Row>
-           
+    </Container>
+
+    {/*=====view part======*/}
+    <Container>
+      <Row className='mt-5'>
+        <Col lg = {6}>
+          <div className="left-view-part"></div>
+        </Col>
+        <Col lg = {6}>
+          <div className="right-design-part text-end">
+            <button type='button' onClick={()=>setLists(true)}><BsListUl className={lists == true ? "filteractive" : ""}></BsListUl></button>
+            <button type='button' onClick={()=>setLists(false)}><BsMicrosoft className={lists == false ? "filteractive" : ""}></BsMicrosoft></button>
+          </div>
+        </Col>
+      </Row>
     </Container>
     <Container>
-      <Row>
+      <Row className='main-category-part'>
         <Col lg = {3}>
           <div className='category-part'></div>
         </Col>
         <Col lg = {9}>
           <div className='view-items'></div>
-          {isLoading
-            ?
-              <div className="loading">
-                  <Spinner animation="border" role="status">
-                  <span className="visually-hidden"></span>
-                  </Spinner>
-              </div>
-            :
-            product.map((item)=>(
-              <Row className='main-view-part align-items-center'>
-              <Col lg = {3} className = "mb-5">
-                <div className='view-image'>
-                  <img style={{width: "100%"}} src={item.image} className = "w-100 img-fluid"/>
-                </div>
-              </Col>
-              <Col lg = {6}>
-                <div className='view-details ps-3'>
-                  <Detailsrating ratings = {item.rating}></Detailsrating>
-                  <p>Reviews ({item.reviews})</p>
-                  <div className='view-header'>
-                    <h2>{item.name}</h2>
-                    <p>{item.description}</p>
-                    {item.inStock == 0
-                       ?
-                       <div className="add-cart">
-                           <button  type='button'>Out of stock</button>
-                       </div>
-                     
-                       :
-                       <div className="add-cart">
-                           <button  type='button'>{item.button}</button>
-                           
-                       </div>                     
-                      }
+          {/*for listing product*/}
+
+            {
+              isLoading ?
+                  <div className="loading">
+                    <Spinner animation="border" role="status">
+                    <span className="visually-hidden"></span>
+                    </Spinner>
                   </div>
-                </div>
-              </Col>
-              <Col lg = {3}>
-                <div className='view-price text-end'>
-                      <h4>${item.price}</h4>
-                      <div className="whishlist">
-                      {wishlistItems.find(product=> product._id === item._id)
-                        ?  
-                       <>
-                          <BsFillHeartFill className="wishlist-mark" onClick={()=>handleWishlist(item)}></BsFillHeartFill>
-                          <span>Add to whishlist</span> 
-                        </>
-                        :
-                       <>
-                          <BsFillHeartFill onClick={()=>handleWishlist(item)}></BsFillHeartFill>
-                          <span>Add to whishlist</span>
-                       </>
-                      }                         
-                      </div>
-                </div>
-              </Col>
-            </Row>
-            ))
-          }
-          
+              :
+
+                lists
+                ?
+                <Productsummery product = {product}></Productsummery>
+                :
+                <Productsummery2 product = {product}></Productsummery2>
+
+            }
+            
         </Col>
       </Row>
     </Container>
 
+        {/*======footer part=====*/}
+
+        <Footer></Footer>
     </>
   )
 }

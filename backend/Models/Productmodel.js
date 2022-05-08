@@ -34,6 +34,10 @@ const Products = new Schema({
     featured:{
         type: Boolean,
     },
+    arrival:{
+        type: String,
+        required: true
+    },
     category:{
         type: String,
         required: true

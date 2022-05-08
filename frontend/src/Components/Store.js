@@ -25,6 +25,20 @@ function reducer(state, action) {
             cartItems: cartItems,
           },
         };
+
+      case "REMOVE_CART":{
+        const cartItems = state.cart.cartItems.filter((item)=> item._id !== action.payload._id)
+        localStorage.setItem('cartItems',JSON.stringify(cartItems))
+        
+        return {
+          ...state,
+          cart: {
+            ...state.cart,
+            cartItems: cartItems,
+          },
+        };
+      }
+     
       default:
         return state;
     }
@@ -61,10 +75,30 @@ function wishlistreducer(state, action) {
 }
 
 
+//search
+const searchinitialState ={
+    searchmain: []
+}
+
+function searchreducer(state, action) {
+    switch (action.type) {
+      case "SEARCH_RESULT":
+        return {
+          ...state,
+          searchmain: action.payload
+        };
+      default:
+        return state;
+    }
+
+}
+
+
 const Storeprovider = (props)=>{
   const [state, dispatch] = useReducer(reducer, initialState)
   const [state2, dispatch2] = useReducer(wishlistreducer, wishlistinitialState)
-  let value = {state,dispatch,state2, dispatch2}
+  const [state3, dispatch3] = useReducer(searchreducer, searchinitialState)
+  let value = {state,dispatch,state2, dispatch2,state3, dispatch3}
 
   return <Store.Provider value = {value}>{props.children}</Store.Provider>
 

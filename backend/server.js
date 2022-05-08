@@ -4,6 +4,7 @@ import seedrouter from './Routes/Seedrouter.js'
 import Productroute from './Routes/Productroute.js'
 import Slugroute from './Routes/Slugroute.js'
 import Idroute from './Routes/Idroute.js'
+import Bannerroute from './Routes/Bannerroute.js'
 
 
 //db connect
@@ -15,9 +16,11 @@ app.use(express.json())
 
 //main router
 app.use('/api',seedrouter)
+//banner-data
+app.use('/api',Bannerroute)
 //get-data
 app.use('/api/products',Productroute)
-//slig-data
+//slug-data
 app.use('/api/products',Slugroute)
 //Product-id
 app.use('/api/productid',Idroute)

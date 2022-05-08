@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './Components/App';
 import {BrowserRouter} from "react-router-dom";
 import { Storeprovider } from './Components/Store';
+import 'swiper/css';
 
 
 

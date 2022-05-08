@@ -7,9 +7,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { Store } from '../Store';
 import Detailsrating from './Detailsrating';
+import ReactImageMagnify from "react-image-magnify";
 import deliver from '../../FastDelivery.png'
 import voucher from '../../voucher.png'
 import stock from '../../Package.png'
+import Errorpage from '../Errorpage';
 
 
 function reducer(state, action) {
@@ -208,7 +210,7 @@ const handleWishlist = ()=>{
     </Navbar.Collapse>
               <div className="cartoption_two">
                 <div className="cart-bag">
-                <BsBag></BsBag>
+                <Link to = "/cartpage"><BsBag></BsBag></Link>
                 {state.cart.cartItems.length > 0 &&   <Badge pill>{state.cart.cartItems.length}</Badge>}
                 <BsEnvelope></BsEnvelope>
               </div>
@@ -230,119 +232,149 @@ const handleWishlist = ()=>{
    <div className="product-details mt-5">
        <Container>
            <Row className='align-items-center'>
-               <Col lg = {6}>
-                   <div className="details-product-left">
-                       <img style={{width: "100%"}} src= {product.image} alt="" />
-                   </div>
-                   <Row className='justify-content-center align-items-center mt-5'>
-                     <Col lg = {1}>
-                        <div className="prev-arrow">
-                          <button type='button'><BsChevronLeft></BsChevronLeft></button>
-                        </div>
-                     </Col>
-                     <Col lg = {8}>
-                       {relatedproducts.length > 0
-                       ?
-                       <Row>
-                           {
-                              relatedproducts.map((item)=>(
-                                <>
-                                  <Col lg = {3}>
-                                    <div className="related-image">
-                                      <Link to = {`${`/api/products/${item.slug}`}`}><img  className='w-100 img-fluid' src= {item.image} /></Link>
-                                    </div>
-                                  </Col>
-                                </>
-                            ))
-                           }
-                       </Row>
-                       :
-                       ""
-                       }
-                     </Col>
-                     <Col lg = {1}>
-                        <div className="next-arrow">
-                          <button type='button'><BsChevronRight></BsChevronRight></button>
-                        </div>
-                     </Col>
-                   </Row>
-               </Col>
-               <Col lg = {6}>
-                   <div className="subdetails-product">
-                      <div className="rating-sithlist d-flex align-items-center">
-                            <div className="rating-left w-50">
-                                <Detailsrating ratings = {product.rating}></Detailsrating>
-                                <p>Reviews ({product.reviews})</p>
-                            </div>
-                            <div className="wishlist-right w-50 text-end">
-                              <div className="whishlist">
-                              <BsFillHeartFill className={`${wishlistproduct ? "wishlist-mark" : ""}`} onClick={handleWishlist}></BsFillHeartFill>
-                                <span>Add to whishlist</span>
-                              </div>
-                            </div>
-                      </div>
-                      <div className="product-name mt-3">
-                          <h2>{product.name}</h2>
-                      </div>
-                      <div className="product-price mt-3 mb-5">
-                          <h3>${product.price}</h3>
-                      </div>
-                      <div className="status-delivery pb-4 d-flex justify-content-between align-items-center">
-                        <div className="delivery d-flex align-items-center">
-                            <img src= {deliver} alt="" />
-                            <span>Free Delivery</span>
-                        </div>
-                        <div className="delivery d-flex align-items-center">
-                            <img src= {voucher} alt="" />
-                            <span style={{marginTop: "0"}}>Available Voucher</span>
-                        </div>
-                        <div className="delivery d-flex align-items-center">
-                            <img src= {stock} alt="" />
-                            <span style={{marginTop: "0"}}>
-                              {product.inStock == 0 ? "Out of stock" : "In Stock"}
-                            </span>
-                        </div>
-                      </div>
-
-                      <div className="product-description mt-3">
-                        <h5>Description</h5>
-                        <p>{product.description}</p>
-                      </div>
-
-
-                      <div className="cart d-flex align-items-center justify-content-between mt-5">
-                        <div className="quantity-part w-50">
-                            <span>Quantity</span>
-                           
-                            <button type='button' onClick={()=>quantityUpgrade(product,quantity == 0 ? 0 : quantity -1)}><BsDash></BsDash></button>
-
-                            <span className='quantity-count'>{quantity}</span>
-                              
-                            <button type='button' onClick={()=>quantityUpgrade(product,quantity + 1)}><BsPlus></BsPlus></button>
-                        </div>
-                          <div className="button-area d-flex justify-content-end w-50">
-                              <div className="chat me-3">
-                              <button  type='button'>Chat</button>                    
-                            </div>
-                            
-                            {product.inStock == 0
-                               ?
-                               <div className="add-cart w-50">
-                                   <button onClick={()=>handleCart(product)} type='button'>Out of stock</button>
-                                   <ToastContainer limit = {1}/>
-                               </div>
-                             
-                               :
-                               <div className="add-cart w-50">
-                                   <button onClick={()=>handleCart(product)} type='button'>{product.button}</button>
-                                   <ToastContainer limit = {1}/>
-                                   
-                               </div>             
-                              }
+              <Col lg = {12}>
+                {
+                  product
+                  ?
+                    <Row>
+                  <Col lg = {6}>
+                    <div className="details-product-left">
+                        {product.image && <ReactImageMagnify
+                            {...{
+                              smallImage: {
+                                alt: "Wristwatch by Ted Baker London",
+                                isFluidWidth: true,
+                                src: `${product.image}`,
+                                sizes:
+                                  "(min-width: 500px) 33.5vw, (min-width: 400px) 50vw, 100vw"
+                              },
+                              largeImage: {
+                                alt: "",
+                                src: `${product.image}`,
+                                width: 1200,
+                                height: 1200
+                              },
+                              isHintEnabled: true
+                            }}
+                      />}
+                    </div>
+                    <Row className='justify-content-center align-items-center mt-5'>
+                      <Col lg = {1}>
+                          <div className="prev-arrow">
+                            <button type='button'><BsChevronLeft></BsChevronLeft></button>
                           </div>
-                      </div>
-                   </div>
-               </Col>
+                      </Col>
+                      <Col lg = {8}>
+                        {relatedproducts.length > 0
+                        ?
+                        <Row>
+                            {
+                                relatedproducts.map((item)=>(
+                                  <>
+                                    <Col lg = {3}>
+                                      <div className="related-image">
+                                        <Link to = {`${`/api/products/${item.slug}`}`}><img  className='w-100 img-fluid' src= {item.image} alt = "product-image"/></Link>
+                                      </div>
+                                    </Col>
+                                  </>
+                              ))
+                            }
+                        </Row>
+                        :
+                        ""
+                        }
+
+                      </Col>
+                      <Col lg = {1}>
+                          <div className="next-arrow">
+                            <button type='button'><BsChevronRight></BsChevronRight></button>
+                          </div>
+                      </Col>
+                    </Row>
+                </Col>
+                <Col lg = {6}>
+                    <div className="subdetails-product">
+                        <div className="rating-sithlist d-flex align-items-center">
+                              <div className="rating-left w-50">
+                                  <Detailsrating ratings = {product.rating}></Detailsrating>
+                                  <p>Reviews ({product.reviews})</p>
+                              </div>
+                              <div className="wishlist-right w-50 text-end">
+                                <div className="whishlist">
+                                <BsFillHeartFill className={`${wishlistproduct ? "wishlist-mark" : ""}`} onClick={handleWishlist}></BsFillHeartFill>
+                                  <span>Add to whishlist</span>
+                                </div>
+                              </div>
+                        </div>
+                        <div className="product-name mt-3">
+                            <h2>{product.name}</h2>
+                        </div>
+                        <div className="product-price mt-3 mb-5">
+                            <h3>${product.price}</h3>
+                        </div>
+                        <div className="status-delivery pb-4 d-flex justify-content-between align-items-center">
+                          <div className="delivery d-flex align-items-center">
+                              <img src= {deliver} alt="" />
+                              <span>Free Delivery</span>
+                          </div>
+                          <div className="delivery d-flex align-items-center">
+                              <img src= {voucher} alt="" />
+                              <span style={{marginTop: "0"}}>Available Voucher</span>
+                          </div>
+                          <div className="delivery d-flex align-items-center">
+                              <img src= {stock} alt="" />
+                              <span style={{marginTop: "0"}}>
+                                {product.inStock == 0 ? "Out of stock" : "In Stock"}
+                              </span>
+                          </div>
+                        </div>
+
+                        <div className="product-description mt-3">
+                          <h5>Description</h5>
+                          <p>{product.description}</p>
+                        </div>
+
+
+                        <div className="cart d-flex align-items-center justify-content-between mt-5">
+                          <div className="quantity-part w-50">
+                              <span>Quantity</span>
+                            
+                              <button type='button' onClick={()=>quantityUpgrade(product,quantity == 0 ? 0 : quantity -1)}><BsDash></BsDash></button>
+
+                              <span className='quantity-count'>{quantity}</span>
+                                
+                              <button type='button' onClick={()=>quantityUpgrade(product,quantity + 1)}><BsPlus></BsPlus></button>
+                          </div>
+                            <div className="button-area d-flex justify-content-end w-50">
+                                <div className="chat me-3">
+                                <button  type='button'>Chat</button>                    
+                              </div>
+                              
+                              {product.inStock == 0
+                                ?
+                                <div className="add-cart w-50">
+                                    <button onClick={()=>handleCart(product)} type='button'>Out of stock</button>
+                                    <ToastContainer limit = {1}/>
+                                </div>
+                              
+                                :
+                                <div className="add-cart w-50">
+                                    <button onClick={()=>handleCart(product)} type='button'>{product.button}</button>
+                                    <ToastContainer limit = {1}/>
+                                    
+                                </div>             
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </Col>
+                </Row>
+
+                :
+
+                <Errorpage></Errorpage>
+                }
+              </Col>
            </Row>
        </Container>
    </div>
