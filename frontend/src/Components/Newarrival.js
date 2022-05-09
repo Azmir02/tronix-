@@ -1,7 +1,8 @@
-import React,{useReducer,useContext,useEffect} from 'react'
+import React,{useReducer,useContext,useEffect, useState} from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import axios from 'axios'
 import { Store } from './Store'
+import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
 
 
@@ -45,6 +46,8 @@ const Newarrival = () => {
         error: ''
     });
 
+    const [hala,setHala] = useState("")
+
     useEffect(()=>{
         let getproducts = async ()=>{
             dispatch({type: 'FETCH_REQUEST'})
@@ -58,8 +61,13 @@ const Newarrival = () => {
             }
            
         }
+        
         getproducts()
     },[])
+
+    // const createdAt = product.map((item) =>  )
+    // console.log(createdAt);
+
   return (
     <>
         <section className='new-arrival'>
@@ -75,7 +83,7 @@ const Newarrival = () => {
                 <Row>
                 {
                     product.map((item)=>(
-                        item.arrival == "true"
+                        dayjs(item.createdAt).format('DD') < 10
                         ?
                         <Col lg = {4}>
                             <div className="arrival-item">
