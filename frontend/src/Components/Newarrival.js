@@ -66,8 +66,8 @@ const Newarrival = () => {
     },[])
 
     // const createdAt =  product.map((item) => dayjs(item.createdAt).format('DD'))
-    // let a = new Date()
-    // console.log(a.getDate());
+    let a = new Date()
+    console.log(a.getDate());
 
   return (
     <>
@@ -84,7 +84,7 @@ const Newarrival = () => {
                 <Row>
                 {
                     product.map((item)=>(
-                        dayjs(item.createdAt).format('DD') < 10
+                        dayjs(item.createdAt).format('DD') < a.getDate()
                         ?
                         <Col lg = {4}>
                             <div className="arrival-item">
