@@ -65,8 +65,9 @@ const Newarrival = () => {
         getproducts()
     },[])
 
-    // const createdAt = product.map((item) =>  )
-    // console.log(createdAt);
+    // const createdAt =  product.map((item) => dayjs(item.createdAt).format('DD'))
+    // let a = new Date()
+    // console.log(a.getDate());
 
   return (
     <>
