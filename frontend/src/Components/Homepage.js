@@ -4,6 +4,7 @@ import Topbar from './Topbar'
 import Footer from './layouts/Footer'
 import Banner from './Banner'
 import Newarrival from './Newarrival'
+import Featured from './Featured'
 
 const Homepage = () => {
   return (
@@ -11,7 +12,9 @@ const Homepage = () => {
     <Topbar></Topbar>
    <Navbars></Navbars>
    <Banner></Banner>
+   {/*Newarraivale not fixed*/}
    <Newarrival></Newarrival>
+   <Featured></Featured>
    <Footer></Footer>
    </>
   )

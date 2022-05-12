@@ -46,13 +46,11 @@ const Newarrival = () => {
         error: ''
     });
 
-    const [hala,setHala] = useState("")
-
     useEffect(()=>{
         let getproducts = async ()=>{
             dispatch({type: 'FETCH_REQUEST'})
             try{
-                let productInfo = await axios.get('/api/products/all')
+                let productInfo = await axios.get('/api/products/latestProduct')
                 dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
             }
             catch(err){
@@ -64,10 +62,6 @@ const Newarrival = () => {
         
         getproducts()
     },[])
-
-    // const createdAt =  product.map((item) => dayjs(item.createdAt).format('DD'))
-    let a = new Date()
-    console.log(a.getDate());
 
   return (
     <>
@@ -84,8 +78,6 @@ const Newarrival = () => {
                 <Row>
                 {
                     product.map((item)=>(
-                        dayjs(item.createdAt).format('DD') < a.getDate()
-                        ?
                         <Col lg = {4}>
                             <div className="arrival-item">
                                 <div className="product-all position-relative">
@@ -102,8 +94,6 @@ const Newarrival = () => {
                                 </div>
                             </div>
                         </Col>
-                        :
-                        ""
                     ))
                 }
                    

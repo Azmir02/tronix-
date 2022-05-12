@@ -167,7 +167,7 @@ const Productcategory = () => {
                         :
                             product.map((item)=>(
                                 
-                                item.featured == true
+                                item.showproduct === true
                                 ?
                                 <Col lg = {4} className = "mt-5">
                                     <div className="product-all">

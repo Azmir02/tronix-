@@ -31,7 +31,7 @@ const Products = new Schema({
     reviews:{
         type: Number,
     },
-    featured:{
+    showproduct:{
         type: Boolean,
     },
     category:{
@@ -45,7 +45,7 @@ const Products = new Schema({
     button:{
         type: String,
         required: true
-    }
+    },
 },
 {
     timestamps: true
