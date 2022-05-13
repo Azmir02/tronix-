@@ -48,7 +48,6 @@ const Featured = () => {
             try{
                 let productInfo = await axios.get('/api/products/featureproduct')
                 dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
-                dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
                
             }
             catch(err){
@@ -60,8 +59,6 @@ const Featured = () => {
         
         getproducts()
     },[])
-    console.log(productleft);
-
 
   return (
    <>
@@ -76,17 +73,52 @@ const Featured = () => {
                     </Col>
                 </Row>
                 <Row>
-                    
-                                <Col lg = {6}>
-                                    <div className='left-featured'>
-                                       asd
+                    {
+                        productleft.map((item)=>(
+                            item.left === "true"
+                            &&
+                            <Col lg = {6}>
+                                <div className="left-features text-center">
+                                    <div className="feature-name">
+                                        <h4>{item.name}</h4>
+                                        <p>{item.price}</p>
+                                    </div>
+                                    <div className="featured-image">
+                                        <img src= {item.image} alt="featuredimage" />
+                                    </div>
+                                    "Countdown"
+                                </div>
+                            </Col>
+                        ))
+                    }
+                     <Col lg = {6}>
+                     {
+                        productright.map((item)=>(
+                            item.right === "true"
+                            &&
+                            <Row>
+                                <Col lg = {12}>
+                                    <div className="right-featured d-flex align-items-center">
+                                        <div className="right-featured-image">
+                                            <img src={item.image} alt="rightfeaturedimage" />
+                                        </div>
+                                        <div className="right-featured-content ps-4">
+                                            <span>Limited offer</span>
+                                            <div className="feature-name">
+                                                <h4>{item.name}</h4>
+                                                <p>{item.price}</p>
+                                            </div>
+                                            "Countdown"
+                                        </div>
+                                        
                                     </div>
                                 </Col>
-                            
-                     
-                        <Col lg = {6}>
-                    asdasd
-                        </Col>
+                            </Row>
+                        ))
+                    }       
+                    </Col>              
+                           
+                
                 </Row>
             </Container>
         </section>
