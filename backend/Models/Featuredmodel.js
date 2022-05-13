@@ -18,6 +18,15 @@ const Featured = new Schema({
     price:{
         type: Number,
         required: true
+    },
+    left:{
+        type: String
+    },
+    right:{
+        type: String
+    },
+    bottom:{
+        type: String
     }
 })
 

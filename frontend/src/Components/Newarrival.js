@@ -2,7 +2,6 @@ import React,{useReducer,useContext,useEffect, useState} from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import axios from 'axios'
 import { Store } from './Store'
-import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
 
 
