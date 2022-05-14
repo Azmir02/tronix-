@@ -46,6 +46,15 @@ const Products = new Schema({
         type: String,
         required: true
     },
+    left:{
+        type: String
+    },
+    right:{
+        type: String
+    },
+    bottom:{
+        type: String
+    }
 },
 {
     timestamps: true

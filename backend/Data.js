@@ -195,6 +195,48 @@ const Product_data = [
         description: "Microphone & Audio with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
         button: "Add to cart"
     },
+    {
+        image: "/images/featured1.jpg",
+        name: "Wireless Microphone",
+        slug: "WirelessMicrophone",
+        price: 29.25,
+        rating: 3,
+        inStock: 22,
+        reviews: 8,
+        showproduct: false,
+        category: "Microphone & Audio",
+        description: "Wireless Microphone with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
+        button: "Add to cart",
+        left: true
+    },
+    {
+        image: "/images/featured2.jpg",
+        name: "Smart Watch New Series",
+        slug: "SmartWatchNewSeries",
+        price: 29.25,
+        rating: 5,
+        inStock: 20,
+        reviews: 78,
+        showproduct: false,
+        category: "Smart Watch",
+        description: "Smart Watch New Series with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
+        button: "Add to cart",
+        right: true
+    },
+    {
+        image: "/images/featured3.jpg",
+        name: "Camera HD + Lens",
+        slug:"CameraLens",
+        price: 29.25,
+        rating: 4,
+        inStock: 2,
+        reviews: 18,
+        showproduct: false,
+        category: "Camera",
+        description: "Camera HD + Lens with the new style, shockproof, clear voice reception that suitable for recording, online meeting, vlogging, and calling. Free casing with high-quality zipper.",
+        button: "Add to cart",
+        right: true
+    }
 ]
 
 export default Product_data

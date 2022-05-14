@@ -41,11 +41,11 @@ const Cartpage = () => {
     }
 
     useEffect(()=>{
-      const a = async()=>{
+      const cupongets = async()=>{
         let cupon = await axios.get("/api/products/cupon")
         setGetcupons(cupon.data);
       }
-      a()
+      cupongets()
       try{
         const findcupon = getcupons.find((item)=> item.cupon === cupons)
         if(findcupon){

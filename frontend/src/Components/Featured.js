@@ -46,7 +46,7 @@ const Featured = () => {
         let getproducts = async ()=>{
             dispatch({type: 'FETCH_REQUEST'})
             try{
-                let productInfo = await axios.get('/api/products/featureproduct')
+                let productInfo = await axios.get('/api/products/all')
                 dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
                
             }
@@ -59,6 +59,7 @@ const Featured = () => {
         
         getproducts()
     },[])
+console.log(productright);
 
   return (
    <>
