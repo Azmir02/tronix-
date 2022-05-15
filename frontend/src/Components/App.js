@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/api/products/all" element={<Productpage/>}></Route>
-          <Route path="/api/products/productlist" element={<Productlist/>}></Route>
+          <Route path="/api/products" element={<Productlist/>}></Route>
           <Route path="/api/products/:slug" element={<Productdetails/>}></Route>
           <Route path="/about" element={<About/>}></Route>
           <Route path="/cartpage" element={<Cartpage/>}></Route>

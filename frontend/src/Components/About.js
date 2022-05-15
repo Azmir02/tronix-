@@ -19,11 +19,11 @@ const About = () => {
 
     useEffect(()=>{
         let aboutbanner = async ()=>{
-            let aboutbannerInfo = await axios.get("/api/products/about")
+            let aboutbannerInfo = await axios.get("/api/aboutbanner")
             setAboutbanner(aboutbannerInfo.data)
 
             //for team
-            let teamInfo = await axios.get("/api/products/team")
+            let teamInfo = await axios.get("/api/teams")
             setTeam(teamInfo.data)
         }
         aboutbanner()

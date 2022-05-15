@@ -2,11 +2,16 @@ import teammodels from "../Models/Teammodel.js";
 import Team from "../Team.js";
 
 
-const teamcontroller = async(req,res)=>{
+const teamLoader = async(req,res)=>{
     await teammodels.deleteMany({})
     let teamparts = await teammodels.insertMany(Team)
     res.send(teamparts)
 }
+const getteam = async (req,res)=>{
+    let teamall = await teammodels.find()
+    res.send(teamall)
+}
 
 
-export default teamcontroller
+
+export {teamLoader, getteam}

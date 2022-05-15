@@ -56,7 +56,7 @@ const Productcategory = () => {
         let getproducts = async ()=>{
             dispatch({type: 'FETCH_REQUEST'})
             try{
-                let productInfo = await axios.get('/api/products/all')
+                let productInfo = await axios.get('/api/products')
                 dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
             }
             catch(err){
@@ -86,10 +86,10 @@ const Productcategory = () => {
         const existingItem = cartItems.find((item)=> item._id == product._id)
         const quantity = existingItem ? existingItem.quantity + 1 : 1
 
-        const {data} = await axios.get(`/api/productid/${product._id}`)
+        const {data} = await axios.get(`/api/products/${product._id}`)
 
         if(data.inStock < quantity){
-            toast.error(`${data.name} is out of stock`, {
+            toast.error(`Product is out of stock`, {
                 position: "bottom-center",
                 autoClose: 1000,
                 limit: 1,
@@ -102,7 +102,7 @@ const Productcategory = () => {
             return
         }
 
-        toast.success(`${data.name} added to cart`, {
+        toast.success(`Product added to cart`, {
             position: "top-right",
             autoClose: 1000,
             limit: 1,
@@ -148,7 +148,7 @@ const Productcategory = () => {
                                 <p>Product List</p>
                             </div>
                             <div className="view-all w-50 text-end">
-                                <Link to = "/api/products/productlist">View All</Link>
+                                <Link to = "/api/products">View All</Link>
                             </div>
                         </div>
                     </div>

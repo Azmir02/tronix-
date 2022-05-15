@@ -28,6 +28,9 @@ const Products = new Schema({
         type: Number,
         required: false,
     },
+    offer:{
+        type: Number
+    },
     reviews:{
         type: Number,
     },

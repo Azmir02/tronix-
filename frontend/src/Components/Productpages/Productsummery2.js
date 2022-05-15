@@ -36,7 +36,7 @@ const Productsummery2 = ({product}) => {
         const existingItem = cartItems.find((item)=> item._id == product._id)
         const quantity = existingItem ? existingItem.quantity + 1 : 1
 
-        const {data} = await axios.get(`/api/productid/${product._id}`)
+        const {data} = await axios.get(`/api/products/${product._id}`)
 
         if(data.inStock < quantity){
             toast.error(`${data.name} is out of stock`, {

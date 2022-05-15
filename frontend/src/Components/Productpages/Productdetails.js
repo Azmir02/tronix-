@@ -56,6 +56,7 @@ const Productdetails = () => {
     const [quantity,setQuantity] = useState(0)
     const [relatedproducts,setRelatedproducts] = useState([])
     const [wishlistproduct,setWishlistproduct] = useState('')
+    const [discount,setDiscount] = useState("")
 
     useEffect(()=>{
         let getproducts = async ()=>{
@@ -66,7 +67,7 @@ const Productdetails = () => {
 
 
                  //related products
-                let productall = await axios.get('/api/products/all')
+                let productall = await axios.get('/api/products')
                 let filterproduct = productall.data.filter((item)=> item.category == productInfo.data.category && item.name !== productInfo.data.name)
                 setRelatedproducts(filterproduct)
             }
@@ -80,6 +81,14 @@ const Productdetails = () => {
         getproducts()
     },[params.slug])
 
+
+    useEffect(()=>{
+      if(product.offer !== 0){
+        const beforediscount = (product.offer * product.price)/100
+        const afterdiscount = product.price - beforediscount
+        setDiscount(afterdiscount);
+      }
+    },[product])
 
     
   
@@ -104,8 +113,8 @@ const Productdetails = () => {
       const existingItem = cartItems.find((item)=> item._id == product._id)
       const quantity = existingItem ? existingItem.quantity + 1 : 1
 
-      const {data} = await axios.get(`/api/productid/${product._id}`)
-
+      const {data} = await axios.get(`/api/products/${product._id}`)
+      
       if(data.inStock < quantity){
           toast.error(`${data.name} is out of stock`, {
               position: "bottom-center",
@@ -310,7 +319,17 @@ const handleWishlist = ()=>{
                             <h2>{product.name}</h2>
                         </div>
                         <div className="product-price mt-3 mb-5">
-                            <h3>${product.price}</h3>
+                            {discount ? <h3>${discount}</h3> : ""}
+                            {discount ? <p><del>{product.price}</del></p> : <h3>${product.price}</h3>}
+                            { 
+                              product.offer > 0
+                              ?
+                              <span>save {product.offer}%</span>
+                              :
+                              ""
+                            }
+                            
+                           
                         </div>
                         <div className="status-delivery pb-4 d-flex justify-content-between align-items-center">
                           <div className="delivery d-flex align-items-center">

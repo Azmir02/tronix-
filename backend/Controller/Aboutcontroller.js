@@ -8,4 +8,9 @@ const aboutban = async(req,res)=>{
    res.send(aboutpic)
 }
 
-export default aboutban
+const getaboutban = async(req,res)=>{
+   let aboutbans = await aboutbanners.find()
+   res.send(aboutbans)
+}
+
+export {aboutban,getaboutban}

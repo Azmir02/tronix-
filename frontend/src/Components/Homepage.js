@@ -5,6 +5,7 @@ import Footer from './layouts/Footer'
 import Banner from './Banner'
 import Newarrival from './Newarrival'
 import Featured from './Featured'
+import { Collection } from './Collection'
 
 const Homepage = () => {
   return (
@@ -15,6 +16,7 @@ const Homepage = () => {
    {/*Newarraivale not fixed*/}
    <Newarrival></Newarrival>
    <Featured></Featured>
+   <Collection></Collection>
    <Footer></Footer>
    </>
   )

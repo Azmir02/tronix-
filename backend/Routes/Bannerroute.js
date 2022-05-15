@@ -1,9 +1,12 @@
 import express from 'express'
-import getbanner from '../Controller/Getbanner.js'
+import { bannerload,getbanners } from '../Controller/Bannercontroller.js'
 
 const Bannerroute = express.Router()
 
-Bannerroute.get('/home',getbanner)
+
+
+Bannerroute.route("/loadbanner").get(bannerload)
+Bannerroute.route("/").get(getbanners)
 
 
 export default Bannerroute

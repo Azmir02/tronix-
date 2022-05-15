@@ -1,6 +1,7 @@
 import React,{useReducer,useContext,useEffect, useState} from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 
 function reducer(state, action) {
@@ -15,7 +16,8 @@ function reducer(state, action) {
                 ...state,
                 isLoading: false,
                 productleft: action.payload,
-                productright: action.payload
+                productright: action.payload,
+                productbottom: action.payload
 
             };
 
@@ -34,21 +36,27 @@ function reducer(state, action) {
 const Featured = () => {
 
     
-    const [{productleft,productright}, dispatch] = useReducer(reducer, {
+    const [{productleft,productright,productbottom}, dispatch] = useReducer(reducer, {
         isLoading: false,
         productleft: [],
         productright: [],
+        productbottom: [],
         error: ''
     });
 
+    let [discount,setDiscount] = useState("")
+    let [discount2,setDiscount2] = useState("")
+    let [discount3,setDiscount3] = useState("")
+    let [maindiscount,setMaindiscount] = useState("")
+    let [maindiscount2,setMaindiscount2] = useState("")
+    let [maindiscount3,setMaindiscount3] = useState("")
 
     useEffect(()=>{
         let getproducts = async ()=>{
             dispatch({type: 'FETCH_REQUEST'})
             try{
-                let productInfo = await axios.get('/api/products/all')
+                let productInfo = await axios.get('/api/products')
                 dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
-               
             }
             catch(err){
                 dispatch({type: 'FETCH_ERROR',payload:err.message })
@@ -59,7 +67,34 @@ const Featured = () => {
         
         getproducts()
     },[])
-console.log(productright);
+
+    useEffect(()=>{
+        productleft.map((item)=>{
+            setDiscount(item.offer);
+            let beforeoffer = (item.price * discount) / 100
+            let afteroffer = item.price - beforeoffer
+            setMaindiscount(afteroffer);
+        })
+        productright.map((item)=>{
+            setDiscount2(item.offer);
+            let beforeoffer2 = (item.price * discount2) / 100
+            let afteroffer2 = item.price - beforeoffer2
+            setMaindiscount2(afteroffer2);
+        })
+        productbottom.map((item)=>{
+            setDiscount3(item.offer);
+            let beforeoffer3 = (item.price * discount3) / 100
+            let afteroffer3 = item.price - beforeoffer3
+            setMaindiscount3(afteroffer3);
+        })
+       
+    })
+     
+    console.log();
+
+  
+
+
 
   return (
    <>
@@ -81,8 +116,9 @@ console.log(productright);
                             <Col lg = {6}>
                                 <div className="left-features text-center">
                                     <div className="feature-name">
-                                        <h4>{item.name}</h4>
-                                        <p>{item.price}</p>
+                                        <h4><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h4>
+                                        {maindiscount ? <del>{item.price}</del> : <p>{item.price}</p>}
+                                        {maindiscount ? <p>{maindiscount.toFixed(2)}</p> : ""}
                                     </div>
                                     <div className="featured-image">
                                         <img src= {item.image} alt="featuredimage" />
@@ -106,8 +142,34 @@ console.log(productright);
                                         <div className="right-featured-content ps-4">
                                             <span>Limited offer</span>
                                             <div className="feature-name">
-                                                <h4>{item.name}</h4>
-                                                <p>{item.price}</p>
+                                                <h4><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h4>
+                                                {maindiscount2 ? <del>{item.price}</del> : <p>{item.price}</p>}
+                                                {maindiscount2 ? <p>{maindiscount2.toFixed(2)}</p> : ""}
+                                            </div>
+                                            "Countdown"
+                                        </div>
+                                        
+                                    </div>
+                                </Col>
+                            </Row>
+                        ))
+                    }       
+                     {
+                        productbottom.map((item)=>(
+                            item.bottom === "true"
+                            &&
+                            <Row>
+                                <Col lg = {12}>
+                                    <div className="right-featured d-flex align-items-center">
+                                        <div className="right-featured-image">
+                                            <img src={item.image} alt="rightfeaturedimage" />
+                                        </div>
+                                        <div className="right-featured-content ps-4">
+                                            <span>Limited offer</span>
+                                            <div className="feature-name">
+                                             <h4><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h4>
+                                                {maindiscount3 ? <del>{item.price}</del> : <p>{item.price}</p>}
+                                                {maindiscount3 ? <p>{maindiscount3.toFixed(2)}</p> : ""}
                                             </div>
                                             "Countdown"
                                         </div>

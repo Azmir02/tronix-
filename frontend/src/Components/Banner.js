@@ -13,7 +13,7 @@ const Banner = () => {
 
     useEffect(()=>{
         const bannerslider = async ()=>{
-            let bannerInfo = await axios.get("/api/home")
+            let bannerInfo = await axios.get("/api/banner")
             setBannerslider(bannerInfo.data);
         }
         bannerslider()
