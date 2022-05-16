@@ -2,12 +2,10 @@ import React,{useEffect, useState,useReducer,useContext} from 'react'
 import { Col, Container, Row,Navbar,Nav,Badge,Spinner} from 'react-bootstrap'
 import {BsFillHeartFill,BsEnvelope,BsSearch ,BsBag,BsListUl,BsMicrosoft} from "react-icons/bs";
 import { Link } from 'react-router-dom';
-import Detailsrating from './Detailsrating';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import { Store } from '../Store';
-import Footer from '../layouts/Footer';
 import Ratings from '../Ratings';
 
 
@@ -18,8 +16,6 @@ const Productsummery2 = ({product}) => {
     const {wishlist:{wishlistItems}} = state2
 
 
-    
-
 
     //wishlist
     const handleWishlist = (product)=>{
@@ -29,6 +25,7 @@ const Productsummery2 = ({product}) => {
         })
         
     }
+
 
 
     //add-to-cart
@@ -51,6 +48,7 @@ const Productsummery2 = ({product}) => {
             });
             return
         }
+        
 
         toast.success(`${data.name} added to cart`, {
             position: "top-right",
@@ -67,6 +65,10 @@ const Productsummery2 = ({product}) => {
             payload:{...product,quantity}
         })
     }
+
+ 
+
+
 
   return (
     <>

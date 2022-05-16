@@ -52,6 +52,8 @@ const Productcategory = () => {
         error: ''
     });
 
+
+
     useEffect(()=>{
         let getproducts = async ()=>{
             dispatch({type: 'FETCH_REQUEST'})
@@ -76,9 +78,8 @@ const Productcategory = () => {
         dispatch2({
         type: 'ADD_WISHLIST',
         payload: product
-        })
-        
-    }
+    })
+}
 
 
     //add-to-cart
@@ -117,6 +118,9 @@ const Productcategory = () => {
             payload:{...product,quantity}
         })
     }
+
+  
+
   return (
     <>
        <div className="allproduct">

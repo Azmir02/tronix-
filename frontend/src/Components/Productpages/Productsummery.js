@@ -7,7 +7,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import { Store } from '../Store';
-import Ratings from '../Ratings';
 
 
 const Productsummery = ({product}) => {
@@ -81,7 +80,7 @@ const Productsummery = ({product}) => {
             <Detailsrating ratings = {item.rating}></Detailsrating>
             <p>Reviews ({item.reviews})</p>
             <div className='view-header'>
-              <h2>{item.name}</h2>
+              <h2><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h2>
               <p>{item.description}</p>
               {item.inStock == 0
                  ?

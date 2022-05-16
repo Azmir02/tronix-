@@ -128,6 +128,10 @@ const Productdetails = () => {
           });
           return
       }
+      cartContext({
+        type: "ADD_TO_CART",
+        payload:{...product, price: discount ? discount : product.price,quantity}
+    })
 
       toast.success(`${data.name} added to cart`, {
           position: "top-right",
@@ -139,10 +143,7 @@ const Productdetails = () => {
           draggable: true,
           progress: undefined,
       });
-      cartContext({
-          type: "ADD_TO_CART",
-          payload:{...product,quantity}
-      })
+      
   }
 
   //for quantity update

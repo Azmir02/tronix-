@@ -627,12 +627,13 @@ ol {
   font-size: 18px;
   font-weight: 400;
 }
-.view-header h2 {
+.view-header h2 a {
   font-family: "Poppins", sans-serif;
   font-size: 24px;
   font-weight: 500;
   color: #383838;
   margin-bottom: 20px;
+  text-decoration: none;
   text-transform: capitalize;
 }
 .view-header p {

@@ -69,6 +69,7 @@ const Productlist = () => {
             try{
                 let productInfo = await axios.get('/api/products')
                 dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
+
             }
             catch(err){
                 dispatch({type: 'FETCH_ERROR',payload:err.message })
