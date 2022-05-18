@@ -53,7 +53,7 @@ const Navbars = () => {
         let getproducts = async ()=>{
             dispatch({type: 'FETCH_REQUEST'})
             try{
-                let productInfo = await axios.get('/api/products/all')
+                let productInfo = await axios.get('/api/products')
                 dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
             }
             catch(err){
@@ -63,8 +63,6 @@ const Navbars = () => {
         }
         getproducts()
     },[])
-
-
 
 
   const handleSearch = (e)=>{
@@ -89,7 +87,6 @@ const Navbars = () => {
     product.map((item)=>{
      if(item.name.includes(searchtopic.toLowerCase())){
       searchArr.push(item)
-        console.log(item);
       }
     })
     setSearchresult(searchArr)
@@ -97,7 +94,9 @@ const Navbars = () => {
       type: "SEARCH_RESULT",
       payload: searchArr
     })
-    navigate("/api/products/productlist")
+    if(searchtopic){
+      navigate("/catalog")
+    }
 
   }
 

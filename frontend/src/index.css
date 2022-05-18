@@ -1395,3 +1395,9 @@ ol {
   font-weight: 400;
   color: #383838;
 }
+
+/*Search Result page*/
+.search-result {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}

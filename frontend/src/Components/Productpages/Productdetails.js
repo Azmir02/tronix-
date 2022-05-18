@@ -83,7 +83,7 @@ const Productdetails = () => {
 
 
     useEffect(()=>{
-      if(product.offer !== 0){
+      if(product.offer >  0){
         const beforediscount = (product.offer * product.price)/100
         const afterdiscount = product.price - beforediscount
         setDiscount(afterdiscount);
