@@ -12,11 +12,10 @@ const getproducts = async (req,res)=>{
     const getproducts = await Productmodel.find()
     res.send(getproducts)
 }
-
 const getProductbyId = async (req,res)=>{
     const Productid = await Productmodel.findById(req.params.id)
+    console.log(Productid);
     res.send(Productid)
-   
 }
 
 const getProductbySlug = async (req,res)=>{
@@ -31,6 +30,9 @@ const getLatestProduct = async (req,res)=>{
 }
 
 
-export {loadProducts,getproducts, getProductbyId,getProductbySlug,getLatestProduct}
+
+
+
+export {loadProducts,getproducts,getProductbyId,getProductbySlug,getLatestProduct}
 
 

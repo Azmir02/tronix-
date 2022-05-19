@@ -10,9 +10,10 @@ import { Store } from '../Store';
 
 
 const Productsummery = ({product}) => {
-    const {state,state2,dispatch2, dispatch:cartContext} = useContext(Store) 
+    const {state,state2,state3,dispatch2, dispatch:cartContext} = useContext(Store) 
   const {cart:{cartItems}} = state
   const {wishlist:{wishlistItems}} = state2
+  const {searchmain} = state3
 
 
     
@@ -21,7 +22,7 @@ const Productsummery = ({product}) => {
         const existingItem = cartItems.find((item)=> item._id == product._id)
         const quantity = existingItem ? existingItem.quantity + 1 : 1
 
-        const {data} = await axios.get(`/api/products/${product._id}`)
+        const {data} = await axios.get(`/api/products/id/${product._id}`)
 
         if(data.inStock < quantity){
             toast.error(`${data.name} is out of stock`, {
@@ -47,10 +48,18 @@ const Productsummery = ({product}) => {
             draggable: true,
             progress: undefined,
         });
-        cartContext({
-            type: "ADD_TO_CART",
-            payload:{...product,quantity}
-        })
+
+        if(product.offer !== 0){
+          cartContext({
+              type: "ADD_TO_CART",
+              payload:{...product,quantity,price: product.price-((product.price*product.offer)/100)}
+          })
+        }else{
+          cartContext({
+              type: "ADD_TO_CART",
+              payload:{...product,quantity}
+          })
+        }
       }
 
     //wishlist
@@ -66,6 +75,8 @@ const Productsummery = ({product}) => {
   return (
     <>
     {
+      searchmain.length === 0
+      ?
       product.map((item)=>(
         <Row className='main-view-part align-items-center'>
         <Col lg = {3}>
@@ -78,7 +89,7 @@ const Productsummery = ({product}) => {
             <Detailsrating ratings = {item.rating}></Detailsrating>
             <p>Reviews ({item.reviews})</p>
             <div className='view-header'>
-              <h2><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h2>
+              <h2><Link to = {`/api/products/name/${item.slug}`}>{item.name}</Link></h2>
               <p>{item.description}</p>
               {item.inStock == 0
                  ?
@@ -98,7 +109,7 @@ const Productsummery = ({product}) => {
         </Col>
         <Col lg = {3}>
           <div className='view-price text-end'>
-                <h4>${item.price}</h4>
+                <h4>${item.offer !== 0 ? item.price-((item.price*item.offer)/100): item.price}</h4>
                 <div className="whishlist">
                 {wishlistItems.find(product=> product._id === item._id)
                   ?  
@@ -117,7 +128,58 @@ const Productsummery = ({product}) => {
         </Col>
       </Row>
       ))
-
+      :
+      searchmain.map((item)=>(
+        <Row className='main-view-part align-items-center'>
+        <Col lg = {3}>
+          <div className='view-image'>
+            <img style={{width: "100%"}} src={item.image} className = "w-100 img-fluid"/>
+          </div>
+        </Col>
+        <Col lg = {6}>
+          <div className='view-details ps-3'>
+            <Detailsrating ratings = {item.rating}></Detailsrating>
+            <p>Reviews ({item.reviews})</p>
+            <div className='view-header'>
+              <h2><Link to = {`/api/products/name/${item.slug}`}>{item.name}</Link></h2>
+              <p>{item.description}</p>
+              {item.inStock == 0
+                 ?
+                 <div className="add-cart">
+                     <button onClick={()=>handleCart(item)}  type='button'>Out of stock</button>
+                     <ToastContainer limit = {1}/>
+                 </div>
+               
+                 :
+                 <div className="add-cart">
+                     <button onClick={()=>handleCart(item)} type='button'>{item.button}</button>
+                     <ToastContainer limit = {1}/>
+                 </div>                     
+                }
+            </div>
+          </div>
+        </Col>
+        <Col lg = {3}>
+          <div className='view-price text-end'>
+                <h4>${item.offer !== 0 ? item.price-((item.price*item.offer)/100): item.price}</h4>
+                <div className="whishlist">
+                {wishlistItems.find(product=> product._id === item._id)
+                  ?  
+                 <>
+                    <BsFillHeartFill className="wishlist-mark" onClick={()=>handleWishlist(item)}></BsFillHeartFill>
+                    <span>Add to whishlist</span> 
+                  </>
+                  :
+                 <>
+                    <BsFillHeartFill onClick={()=>handleWishlist(item)}></BsFillHeartFill>
+                    <span>Add to whishlist</span>
+                 </>
+                }                         
+                </div>
+          </div>
+        </Col>
+      </Row>
+      ))
     
     }
     </>

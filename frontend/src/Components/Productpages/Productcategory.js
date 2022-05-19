@@ -88,7 +88,7 @@ const Productcategory = () => {
         const quantity = existingItem ? existingItem.quantity + 1 : 1
 
         const {data} = await axios.get(`/api/products/${product._id}`)
-
+        console.log(data);
         if(data.inStock < quantity){
             toast.error(`Product is out of stock`, {
                 position: "bottom-center",
@@ -100,9 +100,9 @@ const Productcategory = () => {
                 draggable: true,
                 progress: undefined,
             });
-            return
+              return
         }
-
+        
         toast.success(`Product added to cart`, {
             position: "top-right",
             autoClose: 1000,

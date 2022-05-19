@@ -16,16 +16,6 @@ const app = express()
 //middleware
 app.use(express.json())
 
-// //main router
-// app.use('/api',seedrouter)
-// //banner-data
-// app.use('/api',Bannerroute)
-// //get-data
-// app.use('/api/products',Productroute)
-// //slug-data
-// app.use('/api/products',Slugroute)
-// //Product-id
-// app.use('/api/productid',Idroute)
 
 //main router
 app.use("/api/products",Productroute)

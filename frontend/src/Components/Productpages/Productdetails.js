@@ -62,7 +62,7 @@ const Productdetails = () => {
         let getproducts = async ()=>{
             dispatch({type: 'FETCH_REQUEST'})
             try{
-                let productInfo = await axios.get(`/api/products/${params.slug}`)
+                let productInfo = await axios.get(`/api/products/name/${params.slug}`)
                 dispatch({type: 'FETCH_SUCCESS',payload: productInfo.data })
 
 
@@ -113,7 +113,7 @@ const Productdetails = () => {
       const existingItem = cartItems.find((item)=> item._id == product._id)
       const quantity = existingItem ? existingItem.quantity + 1 : 1
 
-      const {data} = await axios.get(`/api/products/${product._id}`)
+      const {data} = await axios.get(`/api/products/id/${product._id}`)
       
       if(data.inStock < quantity){
           toast.error(`${data.name} is out of stock`, {
@@ -221,7 +221,7 @@ const handleWishlist = ()=>{
               <div className="cartoption_two">
                 <div className="cart-bag">
                 <Link to = "/cartpage"><BsBag></BsBag></Link>
-                {state.cart.cartItems.length > 0 &&   <Badge pill>{state.cart.cartItems.length}</Badge>}
+                {state.cart.cartItems.length > 0 && <Badge pill>{state.cart.cartItems.length}</Badge>}
                 <BsEnvelope></BsEnvelope>
               </div>
               </div>
@@ -283,7 +283,7 @@ const handleWishlist = ()=>{
                                   <>
                                     <Col lg = {3}>
                                       <div className="related-image">
-                                        <Link to = {`${`/api/products/${item.slug}`}`}><img  className='w-100 img-fluid' src= {item.image} alt = "product-image"/></Link>
+                                        <Link to = {`${`/api/products/name/${item.slug}`}`}><img  className='w-100 img-fluid' src= {item.image} alt = "product-image"/></Link>
                                       </div>
                                     </Col>
                                   </>

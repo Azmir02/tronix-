@@ -83,7 +83,7 @@ const Productlist = () => {
     const handleSearch = (e)=>{
       setSearchtopic(e.target.value)
       if(e.target.value){
-      let searchArr = []
+        let searchArr = []
       product.map((item)=>{
         if(item.name.includes(searchtopic.toLowerCase())){
           searchArr.push(item)
@@ -92,7 +92,10 @@ const Productlist = () => {
         setSearchresult(searchArr)
       }
       else{
-        setSearchresult([])
+        dispatch3({
+          type: "SEARCH_REMOVE",
+          payload: searchresult
+        })
       }
     }
   
@@ -102,15 +105,14 @@ const Productlist = () => {
       product.map((item)=>{
        if(item.name.includes(searchtopic.toLowerCase())){
         searchArr.push(item)
-          console.log(item);
         }
       })
       setSearchresult(searchArr)
       dispatch3({
         type: "SEARCH_RESULT",
-        payload: searchArr
+        payload: searchresult
       })
-      navigate("/api/products/productlist")
+      
   
     }
 

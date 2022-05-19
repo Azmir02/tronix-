@@ -68,6 +68,8 @@ function wishlistreducer(state, action) {
             wishlistItems: wishlistItems,
           },
         };
+
+
       default:
         return state;
     }
@@ -87,6 +89,15 @@ function searchreducer(state, action) {
           ...state,
           searchmain: action.payload
         };
+        
+      case "SEARCH_REMOVE":
+        return {
+          ...state,
+          searchmain: []
+        };
+
+
+
       default:
         return state;
     }
@@ -98,6 +109,7 @@ const Storeprovider = (props)=>{
   const [state, dispatch] = useReducer(reducer, initialState)
   const [state2, dispatch2] = useReducer(wishlistreducer, wishlistinitialState)
   const [state3, dispatch3] = useReducer(searchreducer, searchinitialState)
+
   let value = {state,dispatch,state2, dispatch2,state3, dispatch3}
 
   return <Store.Provider value = {value}>{props.children}</Store.Provider>
