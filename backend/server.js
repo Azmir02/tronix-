@@ -2,6 +2,7 @@ import express from 'express'
 import dbconnect from './DBconnection/Dbconnection.js'
 import Aboutbannerroute from './Routes/Aboutbanrouter.js'
 import Bannerroute from './Routes/Bannerroute.js'
+import Brandroute from './Routes/Brandrouter.js'
 import Collectionroute from './Routes/Collectionrouter.js'
 import Discount from './Routes/Discountrouter.js'
 import Productroute from './Routes/Productroute.js'
@@ -24,6 +25,7 @@ app.use("/api/aboutbanner",Aboutbannerroute)
 app.use("/api/teams",Teamrouter)
 app.use("/api/discount",Discount)
 app.use("/api/collection",Collectionroute)
+app.use("/api/brands",Brandroute)
 
 
 

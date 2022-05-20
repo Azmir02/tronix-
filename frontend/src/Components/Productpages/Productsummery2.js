@@ -10,7 +10,7 @@ import Ratings from '../Ratings';
 
 
 
-const Productsummery2 = ({product}) => {
+const Productsummery2 = ({product,search2}) => {
     const {state,state2,state3,dispatch2, dispatch:cartContext} = useContext(Store) 
     const {cart:{cartItems}} = state
     const {wishlist:{wishlistItems}} = state2
@@ -84,7 +84,7 @@ const Productsummery2 = ({product}) => {
     <>
        <Row className="allproduct">
        {
-        searchmain.length === 0
+        search2.length === 0
         ?
         product.map((item)=>(
         
@@ -135,7 +135,7 @@ const Productsummery2 = ({product}) => {
             </Col>
         ))
         :
-        searchmain.map((item)=>(
+        search2.map((item)=>(
 
             <Col lg = {4} className = "mt-5">
             <div className="product-all">

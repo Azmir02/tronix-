@@ -116,7 +116,7 @@ const Featured = () => {
                             <Col lg = {6}>
                                 <div className="left-features text-center">
                                     <div className="feature-name">
-                                        <h4><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h4>
+                                        <h4><Link to = {`/api/products/name/${item.slug}`}>{item.name}</Link></h4>
                                         {maindiscount ? <del>{item.price}</del> : <p>{item.price}</p>}
                                         {maindiscount ? <p>{maindiscount.toFixed(2)}</p> : ""}
                                     </div>
@@ -142,7 +142,7 @@ const Featured = () => {
                                         <div className="right-featured-content ps-4">
                                             <span>Limited offer</span>
                                             <div className="feature-name">
-                                                <h4><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h4>
+                                                <h4><Link to = {`/api/products/name/${item.slug}`}>{item.name}</Link></h4>
                                                 {maindiscount2 ? <del>{item.price}</del> : <p>{item.price}</p>}
                                                 {maindiscount2 ? <p>{maindiscount2.toFixed(2)}</p> : ""}
                                             </div>
@@ -167,7 +167,7 @@ const Featured = () => {
                                         <div className="right-featured-content ps-4">
                                             <span>Limited offer</span>
                                             <div className="feature-name">
-                                             <h4><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h4>
+                                             <h4><Link to = {`/api/products/name/${item.slug}`}>{item.name}</Link></h4>
                                                 {maindiscount3 ? <del>{item.price}</del> : <p>{item.price}</p>}
                                                 {maindiscount3 ? <p>{maindiscount3.toFixed(2)}</p> : ""}
                                             </div>

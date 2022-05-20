@@ -9,7 +9,7 @@ import axios from 'axios'
 import { Store } from '../Store';
 
 
-const Productsummery = ({product}) => {
+const Productsummery = ({product,search}) => {
     const {state,state2,state3,dispatch2, dispatch:cartContext} = useContext(Store) 
   const {cart:{cartItems}} = state
   const {wishlist:{wishlistItems}} = state2
@@ -75,7 +75,7 @@ const Productsummery = ({product}) => {
   return (
     <>
     {
-      searchmain.length === 0
+      search.length === 0
       ?
       product.map((item)=>(
         <Row className='main-view-part align-items-center'>
@@ -129,7 +129,7 @@ const Productsummery = ({product}) => {
       </Row>
       ))
       :
-      searchmain.map((item)=>(
+      search.map((item)=>(
         <Row className='main-view-part align-items-center'>
         <Col lg = {3}>
           <div className='view-image'>

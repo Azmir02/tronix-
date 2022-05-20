@@ -46,7 +46,6 @@ const Productlist = () => {
   const {state,state2,dispatch3, dispatch:cartContext} = useContext(Store) 
   const {cart:{cartItems}} = state
   const {wishlist:{wishlistItems}} = state2
-  const navigate = useNavigate()
 
 
   const [{isLoading,product,error}, dispatch] = useReducer(reducer, {
@@ -92,10 +91,7 @@ const Productlist = () => {
         setSearchresult(searchArr)
       }
       else{
-        dispatch3({
-          type: "SEARCH_REMOVE",
-          payload: searchresult
-        })
+        setSearchresult([])
       }
     }
   
@@ -108,11 +104,6 @@ const Productlist = () => {
         }
       })
       setSearchresult(searchArr)
-      dispatch3({
-        type: "SEARCH_RESULT",
-        payload: searchresult
-      })
-      
   
     }
 
@@ -203,9 +194,9 @@ const Productlist = () => {
 
                 lists
                 ?
-                <Productsummery product = {product}></Productsummery>
+                <Productsummery product = {product} search = {searchresult}></Productsummery>
                 :
-                <Productsummery2 product = {product}></Productsummery2>
+                <Productsummery2 product = {product} search2 = {searchresult}></Productsummery2>
 
             }
             

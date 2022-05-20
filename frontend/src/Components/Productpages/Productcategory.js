@@ -87,7 +87,7 @@ const Productcategory = () => {
         const existingItem = cartItems.find((item)=> item._id == product._id)
         const quantity = existingItem ? existingItem.quantity + 1 : 1
 
-        const {data} = await axios.get(`/api/products/${product._id}`)
+        const {data} = await axios.get(`/api/products/id/${product._id}`)
         console.log(data);
         if(data.inStock < quantity){
             toast.error(`Product is out of stock`, {
@@ -179,7 +179,7 @@ const Productcategory = () => {
                                             <img style={{width: "100%",borderRadius: "8px"}} src= {item.image} alt="" />
                                         </div>
                                         <div className="product-content text-center mt-3">
-                                            <h4><Link to = {`/api/products/${item.slug}`}>{item.name}</Link></h4>
+                                            <h4><Link to = {`/api/products/name/${item.slug}`}>{item.name}</Link></h4>
                                             <h5>${item.price}</h5>
                                         </div>
                                         <div className="ratings-part text-center">
