@@ -103,14 +103,39 @@ function searchreducer(state, action) {
     }
 
 }
+//Users
+const userinitialState ={
+    userInfo: localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : null
+}
+
+function userreducer(state, action) {
+    switch (action.type) {
+      case "USER_LOGIN":
+        return {
+          ...state,
+          userInfo: action.payload
+        };
+      
+      case "USER_LOGOUT":
+        return {
+          ...state,
+          userInfo: null
+        };
+      
+      default:
+        return state;
+    }
+
+}
 
 
 const Storeprovider = (props)=>{
   const [state, dispatch] = useReducer(reducer, initialState)
   const [state2, dispatch2] = useReducer(wishlistreducer, wishlistinitialState)
   const [state3, dispatch3] = useReducer(searchreducer, searchinitialState)
+  const [state4, dispatch4] = useReducer(userreducer, userinitialState)
 
-  let value = {state,dispatch,state2, dispatch2,state3, dispatch3}
+  let value = {state,dispatch,state2, dispatch2,state3, dispatch3,state4, dispatch4}
 
   return <Store.Provider value = {value}>{props.children}</Store.Provider>
 

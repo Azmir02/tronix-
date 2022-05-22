@@ -1,14 +1,11 @@
 import React,{useEffect, useState,useReducer,useContext} from 'react'
 import { Col, Container, Row,Navbar,Nav,Badge,Spinner} from 'react-bootstrap'
 import {BsEnvelope,BsSearch ,BsBag,BsListUl,BsMicrosoft} from "react-icons/bs";
-import { Link ,useNavigate} from 'react-router-dom';
-import Detailsrating from './Detailsrating';
-import { ToastContainer, toast } from 'react-toastify';
+import { Link} from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import { Store } from '../Store';
 import Footer from '../layouts/Footer';
-import Ratings from '../Ratings';
 import Productsummery from './Productsummery';
 import Productsummery2 from './Productsummery2';
 

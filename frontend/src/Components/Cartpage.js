@@ -2,7 +2,7 @@ import axios from 'axios';
 import React,{useContext, useEffect, useState,useReducer} from 'react'
 import { Col, Container, Row,Navbar,Nav,Breadcrumb,Badge,Modal,Button} from 'react-bootstrap'
 import { BsPlus,BsChevronRight,BsDash,BsEnvelope ,BsX,BsBag,BsArrowRightShort} from "react-icons/bs";
-import { useParams,useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import cuponcode from '../cuponcode.png'
 import { Link } from 'react-router-dom';
 import { Store } from './Store';

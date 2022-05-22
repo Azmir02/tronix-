@@ -8,6 +8,7 @@ import Featured from './Featured'
 import { Collection } from './Collection'
 
 const Homepage = () => {
+
   return (
    <>
     <Topbar></Topbar>

@@ -7,6 +7,7 @@ import Collectionroute from './Routes/Collectionrouter.js'
 import Discount from './Routes/Discountrouter.js'
 import Productroute from './Routes/Productroute.js'
 import Teamrouter from './Routes/Teamrouter.js'
+import Userroute from './Routes/Userroutes.js'
 
 
 
@@ -26,6 +27,7 @@ app.use("/api/teams",Teamrouter)
 app.use("/api/discount",Discount)
 app.use("/api/collection",Collectionroute)
 app.use("/api/brands",Brandroute)
+app.use("/api/users",Userroute)
 
 
 

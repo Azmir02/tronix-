@@ -1,11 +1,10 @@
 import React, { useContext, useState,useReducer,useEffect } from 'react'
 import {Navbar,Container,Nav,Badge} from 'react-bootstrap'
 import { BsSearch,BsEnvelope ,BsBag} from "react-icons/bs";
-import { Link,useNavigate } from 'react-router-dom';
+import { Link,useNavigate,useLocation } from 'react-router-dom';
 import { Store } from './Store';
+import user from '../User.png'
 import axios from 'axios';
-import Productlist from './Productpages/Productlist';
-
 
 
 function reducer(state, action) {
@@ -36,8 +35,14 @@ function reducer(state, action) {
 }
 
 const Navbars = () => {
-  const {state,dispatch3} = useContext(Store)
+  const {state,dispatch3,state4,dispatch4} = useContext(Store)
+  const {userInfo} = state4
   const navigate = useNavigate()
+
+  
+  const {search} = useLocation()
+  const redirectUrl = new URLSearchParams(search).get('redirect')
+  const redirect = redirectUrl ? redirectUrl : "/"
 
 
   const [searchtopic,setSearchtopic] = useState("")
@@ -100,6 +105,17 @@ const Navbars = () => {
 
   }
 
+  //Logout-user
+  const handleLogout = ()=>{
+    dispatch4({
+      type: "USER_LOGOUT",
+    })
+    localStorage.removeItem('users')
+  } 
+
+ 
+
+
   return (
    <>
    <Navbar expand="lg">
@@ -122,8 +138,24 @@ const Navbars = () => {
                     {state.cart.cartItems.length > 0 &&   <Badge pill>{state.cart.cartItems.length}</Badge>}
                 
                 <BsEnvelope></BsEnvelope>
-                <Link style={{marginRight: "32px"}} to = "/signin">Sign in</Link>
-                <button className='signup' type='button'><Link  to = "/signup">Sign up</Link></button>
+                {
+                  userInfo
+                  ?
+                  <>
+                  <img src={user} alt="user" />
+                  <div className="username-box">
+                    <span className='userName'>{userInfo.data.name}</span>
+                    <div className="user-dropdown">
+                        <span onClick={handleLogout} >Logout</span>
+                    </div>
+                  </div>
+                  </>
+                  :
+                  <>
+                    <Link style={{marginRight: "32px"}} to = "/signin?redirect=/shipping">Sign in</Link>
+                  <button className='signup' type='button'><Link  to = {`/signup?redirect=${redirect}`}>Sign up</Link></button>
+                  </>
+                }
               </div>
             </div>
    </Container>
